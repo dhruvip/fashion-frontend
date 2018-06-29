@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { selectAccessories } from '../actions/index';
 
 function mapStateToProps(state) {
     return {
         accessories: state.accessories
     };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ selectAccessories: selectAccessories },dispatch);
 }
 
 class AccessoriesList extends Component {
@@ -15,6 +21,7 @@ class AccessoriesList extends Component {
         return this.props.accessories.map(accessories => {
           return (
             <li
+              onClick={ () => this.props.selectAccessories(accessories) }
               key={accessories.itemCode}
               className="list-group-item"
             >
@@ -32,4 +39,4 @@ class AccessoriesList extends Component {
     }
 }
 
-export default connect(mapStateToProps)(AccessoriesList);
+export default connect(mapStateToProps,mapDispatchToProps)(AccessoriesList);
