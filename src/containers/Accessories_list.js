@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { selectAccessories } from '../actions/index';
+import { selectAccessories } from '../actions/action_select_accessories';
 
 function mapStateToProps(state) {
     return {
@@ -31,6 +31,10 @@ class AccessoriesList extends Component {
         });
     }
     render() {
+        if (!this.props.accessories) {
+            return <ul />
+        }
+        
         return (
             <ul className='list-group col-sm-4'>
                 { this.renderList() }
