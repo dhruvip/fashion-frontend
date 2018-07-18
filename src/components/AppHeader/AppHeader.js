@@ -12,10 +12,13 @@ import Menu from '@material-ui/core/Menu';
 
 
 
-const classes = theme => ({
+const styles = theme => ({
     root: {
       flexGrow: 1,
-      zIndex: theme.zIndex.drawer + 1,
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        position: 'relative'
     },
     flex: {
       flexGrow: 1,
@@ -40,50 +43,20 @@ class AppHeader extends Component {
     };
 
     renderAppHeader = () => {
-        return (<AppBar position = "static" className={classes.root}>
+        const { classes } = this.props;
+        return (<AppBar elevation={1} className={classes.appBar}>
             <Toolbar>
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                <IconButton>
                     <MenuIcon />
-                    <Typography variant="title" color="inherit" className={classes.flex}>
-                        CommonCloset
-                    </Typography>
-                        {/* {true && (
-                            <div>
-                                <IconButton
-                                aria-owns={open ? 'menu-appbar' : null}
-                                aria-haspopup="true"
-                                onClick={this.handleMenu}
-                                color="inherit"
-                                >
-                                <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={this.handleClose}
-                                >
-                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                </Menu>
-                            </div>
-                        )} */}
                 </IconButton>
+                <Typography> Common Closet</Typography>
             </Toolbar>
         </AppBar>);
-    }
+    };
 
     render() {
         return this.renderAppHeader();
     }
 }
 
-export default withStyles(classes)(AppHeader);
+export default withStyles(styles)(AppHeader);

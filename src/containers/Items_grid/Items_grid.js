@@ -12,8 +12,9 @@ import InfoIcon from '@material-ui/icons/Info';
 
 //actions
 import fetchAllItems from '../../actions/index';
+import { withStyles } from '@material-ui/core';
 
-const classes = {
+const styles = {
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -45,7 +46,8 @@ class ItemsGrid extends Component {
 
     }
 
-    GridListExampleSimple() {
+    GridListExampleSimple = () => {
+        const { classes } = this.props;
         return this.props.items ? (
             <div className={classes.root}>
               <GridList cellHeight={180} className={classes.gridList}>
@@ -80,4 +82,4 @@ class ItemsGrid extends Component {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ItemsGrid);
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(ItemsGrid));

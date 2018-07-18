@@ -3,15 +3,16 @@ import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import  { ListItem, ListItemIcon, ListItemText }  from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import Typography from '@material-ui/core/Typography';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
-const classes = theme => ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
     height: 430,
@@ -20,8 +21,8 @@ const classes = theme => ({
     position: 'relative',
     display: 'flex',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+  drawer: {
+    zIndex: 1,
   },
   drawerPaper: {
     position: 'relative',
@@ -42,32 +43,34 @@ class SideBar extends Component {
     }
 
     renderSideBar = () => {
+		const { classes } = this.props;
         return (
-            <div className={classes.root}>
-              {/* <AppBar position="absolute" className={classes.appBar}>
-                <Toolbar>
-                  <Typography variant="title" color="inherit" noWrap>
-                    CommonCloset
-                  </Typography>
-                </Toolbar>
-              </AppBar> */}
-              <Drawer
-                variant="permanent"
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-              >
-                <div className={classes.toolbar} />
-                <List>Dhruvi</List>
-                <Divider />
-                <List>Pandya</List>
-              </Drawer>
-              <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Typography noWrap>{'Test Ignore'}</Typography>
-              </main>
-            </div>
-          );
+			<Drawer
+			className={classes.drawer}
+				variant="permanent"
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+            >
+				<div className={classes.toolbar} >
+					<List>
+						<ListItem button>
+						<ListItemIcon>
+							<InboxIcon />
+						</ListItemIcon>
+						<ListItemText primary="Inbox" />
+						</ListItem>
+						<ListItem button>
+						<ListItemIcon>
+							<InboxIcon />
+						</ListItemIcon>
+						<ListItemText primary="Something Else" />
+						</ListItem>
+					</List>
+				</div>
+			
+			</Drawer>
+        );
     };
 
     render() {
@@ -75,4 +78,4 @@ class SideBar extends Component {
     }
 }
 
-export default withStyles(classes)(SideBar);
+export default withStyles(styles)(SideBar);
