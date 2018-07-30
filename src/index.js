@@ -8,7 +8,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import reducers from './reducers'
 import './index.css';
 import App from './components/App/App';
-import Admin from './components/Admin/Admin'
+import Admin from './containers/AdminContainer'
 // import registerServiceWorker from './registerServiceWorker';
 
 const createStoreWithMiddleWare = applyMiddleware(ReduxPromise)(createStore)

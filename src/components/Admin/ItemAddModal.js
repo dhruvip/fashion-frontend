@@ -50,9 +50,10 @@ class Form extends Component {
 
     getFormFromSchema = () => {
         const { classes } = this.props;
-        return this.props.formSchema.map((field) => {
+        return this.props.formSchema.map((field, index) => {
             if (field.type === 'text') {
                 return (<TextField
+                    key={field.modelName+index}
                     id={field.columnName}
                     label={field.columnName}
                     className={classes.textField}
@@ -67,9 +68,11 @@ class Form extends Component {
     onSave = () => {
         var newItem = {};
         this.props.formSchema.map((field) => {
-            newItem[field.columnName] = this.state[field.columnName];
+            newItem[field.modelName] = this.state[field.columnName];
         });
+        console.log('save in form')
         this.props.onSave(newItem);
+        this.props.onCancel();
     };
 
     render() {
@@ -79,7 +82,7 @@ class Form extends Component {
               { this.getFormFromSchema() }
               <Divider />
               <div className={classes.btnContainer}> 
-                <Button variant="contained" color="primary" className={classes.button} onClick={this.props.onSave}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={this.onSave}>
                     Save
                 </Button>
                 <Button variant="contained" color="default" className={classes.button} onClick={this.props.onCancel}>
@@ -153,7 +156,7 @@ class ItemAddModal extends Component {
                 <Clear className={classes.icon} onClick={this.addItemModalClose}/>
             </div>
             <AddItemForm 
-            onSave={this.addItemModalOpen} 
+            onSave={this.props.onSave} 
             onCancel={this.addItemModalClose}
             formSchema={this.props.formSchema}/>
             </div>

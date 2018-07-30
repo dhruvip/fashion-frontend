@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import { Paper, TableHead, TableBody, TableRow, TableCell, Button } from '@material-ui/core';
+import Delete from '@material-ui/icons/Delete';
 
 class ItemsTable extends Component {
     /**
@@ -15,6 +16,12 @@ class ItemsTable extends Component {
         itemRetailCost: { type: Number, required: true },
         });
      */
+
+    onDelete = (toBeDeleted) => {
+        console.log(toBeDeleted)
+        this.props.onDelete(toBeDeleted);
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -23,22 +30,31 @@ class ItemsTable extends Component {
                     <TableHead>
                         <TableRow className={classes.headRow}>
                             { 
-                                this.props.columns.map((col, index) => {
+                                this.props.schema.map((col, index) => {
                                     return (<TableCell className={classes.headRow}
-                                        key={ col + index }>
-                                        {col}
+                                        key={ col.columnName + index }>
+                                        {col.columnName}
                                     </TableCell>);
                                 })
-                            }    
+                            }
+                            <TableCell className={classes.headRow}>Actions</TableCell>    
                         </TableRow>                    
                     </TableHead>
                     <TableBody>
-                        <TableRow className={classes.bodyRow}>
-                            <TableCell>Test1</TableCell>
-                            <TableCell>Test1</TableCell>
-                            <TableCell>Test1</TableCell>
-                            <TableCell>Test1</TableCell>
-                        </TableRow>
+                            {
+                                this.props.data.map((eachEntry, i) => {
+                                    return (<TableRow className={classes.bodyRow} key={'tableRow'+i}>
+                                        {
+                                            this.props.schema.map((col, index) => {
+                                                return (<TableCell key={eachEntry[col.modelName]+index}>
+                                                    {eachEntry[col.modelName]}
+                                                </TableCell>)
+                                            })
+                                        }
+                                        <TableCell><Delete className={classes.icons} onClick={e => this.onDelete(eachEntry)}/></TableCell>
+                                    </TableRow>)
+                                })
+                            }
                     </TableBody>
                 </Table>
             </Paper>
@@ -60,6 +76,9 @@ const tableStyles = theme => {
         },
         headCell: {
             fontSize: '1em',
+        },
+        icons: {
+            cursor: 'pointer'
         }
     });
 };
