@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import customTheme from '../Theme/Theme';
 import ItemsTable from './ItemsTable';
 import AddModal from './ItemAddModal';
+import AdminContainer from './../../containers/AdminContainer';
 
 const adminPageStyles = theme => {
     return ({
@@ -43,9 +44,8 @@ class Admin extends Component {
         this.setState({open: true});
     }
 
-    addItemModalClose = (pass) => {
+    addItemModalClose = () => {
         this.setState({open: false});
-        console.log(pass, 'from modal');
     }
 
     getFormSchema = () => {
@@ -81,14 +81,25 @@ class Admin extends Component {
         }
     }
 
+    setData = (data) => {
+        // console.log('in admin');
+        // console.log(data);
+    };
+
+    onAddModalSave = (newItem) => {
+        console.log('admin:new add: ', newItem);
+    }
+
     render() {
         const { classes } = this.props;
         return (<MuiThemeProvider theme={customTheme}>
+            <AdminContainer stateHook={this.setData} />
             <div className={classes.root}>
                 <div className={classes.adminTitle} style={{color: customTheme.palette.primary.main}} >
                     ADMIN
                 </div>
-                <ItemsTable columns={this.state.watchesCol}/>
+                <ItemsTable columns={this.state.watchesCol}
+                data={null}/>
                 <Button
                     onClick={this.addItemModalOpen}
                     variant="fab" 
@@ -99,6 +110,7 @@ class Admin extends Component {
                 </Button>
                 { this.state.open ? <AddModal isOpen={this.state.open}
                     onClose={this.addItemModalClose}
+                    onSave={this.onAddModalSave}
                     formSchema={this.getFormSchema()}/> : <div />}
             </div>
         </MuiThemeProvider>);

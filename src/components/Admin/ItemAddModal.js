@@ -35,35 +35,54 @@ const formStyles = theme => {
 class Form extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            
-        }
-    }
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value
+        this.state = {};
+        
+        props.formSchema.map((field) => {
+            this.state[field.columnName] = field.columnName;
         });
     }
+
+    handleChange = field => event => {
+        this.setState({
+            [field]: event.target.value
+        });
+    }
+
+    getFormFromSchema = () => {
+        const { classes } = this.props;
+        return this.props.formSchema.map((field) => {
+            if (field.type === 'text') {
+                return (<TextField
+                    id={field.columnName}
+                    label={field.columnName}
+                    className={classes.textField}
+                    value={this.state[field.columnName]}
+                    onChange={this.handleChange(field.columnName)}
+                    margin="normal"
+                  />)
+            }
+        });
+    }
+
+    onSave = () => {
+        var newItem = {};
+        this.props.formSchema.map((field) => {
+            newItem[field.columnName] = this.state[field.columnName];
+        });
+        this.props.onSave(newItem);
+    };
 
     render() {
         const { classes } = this.props;
         return (
             <form className={classes.container} noValidate autoComplete="off">
-              <TextField
-                id="name"
-                label="Name"
-                className={classes.textField}
-                value={this.state.name}
-                onChange={this.handleChange('name')}
-                margin="normal"
-              />
+              { this.getFormFromSchema() }
               <Divider />
               <div className={classes.btnContainer}> 
-                <Button variant="contained" color="primary" className={classes.button}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={this.props.onSave}>
                     Save
                 </Button>
-                <Button variant="contained" color="default" className={classes.button}>
+                <Button variant="contained" color="default" className={classes.button} onClick={this.props.onCancel}>
                     Cancel
                 </Button>
               </div>
@@ -86,6 +105,7 @@ const modalStyles = theme => {
             position: 'absolute',
             right: '1.250em',
             fontSize: 32,
+            cursor: 'pointer'
         },
     });
 };
@@ -109,7 +129,7 @@ class ItemAddModal extends Component {
     }
 
     componentWillUnmount() {
-        console.log('component did unmount');
+        // console.log('component did unmount');
     }
 
     render () {
@@ -130,9 +150,12 @@ class ItemAddModal extends Component {
                 <Typography variant="title" id="modal-title">
                     Add New Item
                 </Typography>
-                <Clear className={classes.icon}/>
+                <Clear className={classes.icon} onClick={this.addItemModalClose}/>
             </div>
-            <AddItemForm />
+            <AddItemForm 
+            onSave={this.addItemModalOpen} 
+            onCancel={this.addItemModalClose}
+            formSchema={this.props.formSchema}/>
             </div>
         </Modal>);
     }
