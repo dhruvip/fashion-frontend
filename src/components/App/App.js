@@ -6,25 +6,8 @@ import ActiveAccessory from '../../containers/Active_accessories';
 import ItemsGrid from '../../containers/Items_grid/Items_grid';
 import AppHeader from '../AppHeader/AppHeader';
 import SideBar from '../SideBar/SideBar';
-
-
-//MUI Theme imports and customization
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-
-const customTheme = createMuiTheme({
-	palette: {
-		primary: {
-			main: '#4db6ac'
-		},
-		secondary: { 
-			main: '#b9f6ca'
-		},
-	},
-  	typography: {
-		  fontFamily: ['Courier']
-	  }
-});
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import customTheme from '../Theme/Theme';
 
 //This styles can be accessed through this.props.classes
 const styles = theme => ({
