@@ -38,17 +38,17 @@ return ({
 };
 
 function mapStateToProps(state) {
-return {
-	items: state.items,
-	apiStatus: state.saveStatus
-};
+	return {
+		items: state.items,
+		apiStatus: state.saveStatus
+	};
 }
 
 function mapDispatchToProps(dispatch) {
-return bindActionCreators({ 
-	fetchAllItems: fetchAllItems,
-	saveNewItem: saveNewItem,
-	deleteOneItem: deleteOneItem
+	return bindActionCreators({ 
+		fetchAllItems: fetchAllItems,
+		saveNewItem: saveNewItem,
+		deleteOneItem: deleteOneItem
 	}, dispatch);
 }
 
