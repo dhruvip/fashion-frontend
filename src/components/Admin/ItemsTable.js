@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import { Paper, TableHead, TableBody, TableRow, TableCell, Button } from '@material-ui/core';
+import { Paper, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
 
 class ItemsTable extends Component {

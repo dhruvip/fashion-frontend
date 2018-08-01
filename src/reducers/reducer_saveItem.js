@@ -3,6 +3,7 @@ export default function (state = null, action) {
         case 'SAVE_NEW_ITEM':
             console.log(action.payload);
             return 'saved successfully';
-    };
-    return state;
+        default:
+            return state;
+    }
 }

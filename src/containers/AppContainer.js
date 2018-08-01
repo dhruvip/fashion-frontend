@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import ItemsGrid from './../components/App/Grid';
 import AppHeader from './../components/AppHeader/AppHeader';
-import SideBar from './../components/SideBar/SideBar';
+// import SideBar from './../components/SideBar/SideBar';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import customTheme from './../components/Theme/Theme';
 
@@ -18,7 +18,7 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
     return {
-        items: state.items
+        ...state
     };
 }
     
@@ -31,32 +31,36 @@ function mapDispatchToProps(dispatch) {
 
 class AppContainer extends Component {
 	constructor(props) {
-		super(props);
+        super(props);
 		this.state = {
 			drawer: false,
 			login: false,
-			theme: customTheme
 		};
     }
     
     componentDidMount() {
-        this.props.fetchAllItems().then((d) => {
-            console.log(d.data);
-        });
+		console.log(this.props)
+		this.props.fetchAllItems();
     }
 
 	renderApp = () => {
+		console.log(this.props.items)
+		this.props.items.data[0].itemModel = 'qwertyuio erdtghjkl; ertyuio dfghjkl fsgdsdfgczsjk dsjfcjfuiewiruehuifh kuasdhkajwheruiahkwurfhiuwecfiuewgfkugicukebfkue jewydygJKWGEIDUEGDYUKDVUKYEWVBCDBWE';
 		const { classes } = this.props;
-		return (<MuiThemeProvider theme={this.state.theme}>
+		return (<MuiThemeProvider theme={customTheme}>
 			<div className={classes.root}>
 				<AppHeader />
 				{/* <SideBar /> */}
-                <ItemsGrid />
+                <ItemsGrid data={this.props.items.data}/>
                 
 			</div>
 		</MuiThemeProvider>);
 	};
 	render() {
+		console.log(this.props.items)
+		if (!this.props.items) {
+			return <div />;
+		}
 		return this.renderApp();
 	}
 }

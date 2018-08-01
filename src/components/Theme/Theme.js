@@ -1,5 +1,5 @@
 //MUI Theme imports and customization
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const customTheme = createMuiTheme({
 	palette: {
