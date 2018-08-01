@@ -62,6 +62,7 @@ class Form extends Component {
                     margin="normal"
                   />)
             }
+            return;
         });
     }
 
@@ -114,10 +115,7 @@ const modalStyles = theme => {
 };
 
 class ItemAddModal extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     addItemModalOpen = () => {
         this.setState({open: true});
     }
