@@ -23,8 +23,9 @@ const styles = theme => ({
       flexGrow: 1,
     },
     appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        position: 'static'
+        zIndex: theme.zIndex.drawer + 100,
+        position: 'fixed',
+        minWidth: 'auto'
     },
     flex: {
       flexGrow: 1,
@@ -39,14 +40,16 @@ class AppHeader extends Component {
 
     constructor(props) {
         super(props);
+        this.accountBtn = React.createRef();
+        this.cartBtn = React.createRef();
         this.state = {
-            auth: true,
-            anchorEl: null,
+            accountBtnClick: false
           };
     } 
 
-    handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
+    handleAccountMenu = event => {
+        this.accountBtn = event.currentTarget;   
+        this.setState(state => ({ accountBtnClick: !state.accountBtnClick }));
     };
 
     handleClose = () => {
@@ -54,39 +57,35 @@ class AppHeader extends Component {
     };
 
     renderAppHeader = () => {
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
         const { classes } = this.props;
         return (<AppBar elevation={1} className={classes.appBar}>
             <Toolbar>
                 <Typography className={classes.flex}> Common Closet</Typography>
                 <div >
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleMenu}
-                        color="inherit"
+                        onClick={this.handleAccountMenu}
                         className={classes.menuButton}
                     >
                         <AccountCircle />
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleMenu}
-                        color="inherit"
+                        ref={this.cartBtn}
+                        onClick={this.handleCartMenu}
                         className={classes.menuButton}
                     >
                         <Cart />
                     </IconButton>
-                    <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
-                        {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            id="menu-appbar"
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                            <Paper>
+                    <Popper open={this.state.accountBtnClick} anchorEl={this.accountBtn} 
+                    anchororigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    transformorigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    >
+                        <Paper>
                             <ClickAwayListener onClickAway={this.handleClose}>
                                 <MenuList>
                                 <MenuItem onClick={this.handleClose}>Profile</MenuItem>
@@ -94,9 +93,7 @@ class AppHeader extends Component {
                                 <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                        )}
+                        </Paper>
                     </Popper>
                 </div>
             </Toolbar>

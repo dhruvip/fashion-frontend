@@ -10,20 +10,21 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 const styles = theme => {
+    console.log(theme)
     return ({
         root: {
-            ...theme.mixins.gutters(),
-            paddingTop: theme.spacing.unit * 2,
-            paddingBottom: theme.spacing.unit * 2,
-            marginTop: '0.625em',
-            marginLeft: '1.250em',
-            marginRight: '1.250em',
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
-            // maxWidth: '62.500em',
-            maxHeight: '100vh'
+            // ...theme.mixins.gutters(),
+            // paddingTop: theme.spacing.unit * 2,
+            // paddingBottom: theme.spacing.unit * 2,
+            // marginTop: '0.625em',
+            // marginLeft: '1.250em',
+            // marginRight: '1.250em',
+            // display: 'flex',
+            // flexDirection: 'column',
+            // flexWrap: 'wrap',
+            // justifyContent: 'space-evenly',
+            // // maxWidth: '62.500em',
+            // maxHeight: '100vh'
 
         },
         card: {

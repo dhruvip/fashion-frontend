@@ -13,7 +13,20 @@ import { fetchAllItems } from './../actions/index';
 
 const styles = theme => ({
     root: {
-    }
+		minHeight: '100%',
+		display: 'flex',
+
+	},
+	container: {
+		maxWidth: '100vw',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'space-between',
+		marginTop: '70px',
+		margin: '0 0 0 0',
+		position: 'relative',
+		flex: '1 0 auto'
+	}
 });
 
 function mapStateToProps(state) {
@@ -50,8 +63,10 @@ class AppContainer extends Component {
 		return (<MuiThemeProvider theme={customTheme}>
 			<div className={classes.root}>
 				<AppHeader />
-				{/* <SideBar /> */}
-                <ItemsGrid data={this.props.items.data}/>
+				<div className={classes.container}>
+					{/* <SideBar /> */}
+					<ItemsGrid data={this.props.items.data}/>
+				</div>
                 
 			</div>
 		</MuiThemeProvider>);
@@ -65,4 +80,4 @@ class AppContainer extends Component {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(AppContainer));
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles,{withTheme: true})(AppContainer));
