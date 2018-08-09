@@ -1,18 +1,18 @@
 //MUI Theme imports and customization
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const customTheme = createMuiTheme({
+const theme =  createMuiTheme({
 	palette: {
 		primary: {
-			main: '#4db6ac'
+			main: '#4ab2a9'
 		},
 		secondary: { 
-			main: '#b9f6ca'
+			main: '#cae2d5'
 		},
 	},
   	typography: {
 		  fontFamily: ['Courier']
 	  }
 });
-
-export default customTheme;
+console.log(theme)
+export default theme;

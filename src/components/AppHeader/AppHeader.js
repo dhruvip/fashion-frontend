@@ -15,7 +15,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
-
+import { Redirect } from 'react-router-dom'
 
 
 const styles = theme => ({
@@ -27,8 +27,17 @@ const styles = theme => ({
         position: 'fixed',
         minWidth: 'auto'
     },
-    flex: {
+    logo: {
       flexGrow: 1,
+      cursor: 'pointer',
+      '&:hover': {
+          fontSize: '0.99em',
+          textShadow: '1px 1px #000000'
+      }
+    },
+    popper: {
+        zIndex: theme.zIndex.tooltip,
+        marginTop: '0.313em'
     },
     menuButton: {
       marginLeft: -12,
@@ -52,15 +61,20 @@ class AppHeader extends Component {
         this.setState(state => ({ accountBtnClick: !state.accountBtnClick }));
     };
 
+    handleCartMenu = event => {
+        event.preventDefault();
+        this.props.onCartClick();
+    }
+
     handleClose = () => {
-        this.setState({ anchorEl: null });
     };
 
     renderAppHeader = () => {
         const { classes } = this.props;
         return (<AppBar elevation={1} className={classes.appBar}>
             <Toolbar>
-                <Typography className={classes.flex}> Common Closet</Typography>
+                <Typography className={classes.logo}
+                    onClick={() => this.props.onLogoClick()}> Common Closet</Typography>
                 <div >
                     <IconButton
                         onClick={this.handleAccountMenu}
@@ -75,7 +89,8 @@ class AppHeader extends Component {
                     >
                         <Cart />
                     </IconButton>
-                    <Popper open={this.state.accountBtnClick} anchorEl={this.accountBtn} 
+                    <Popper open={this.state.accountBtnClick} anchorEl={this.accountBtn}
+                    className={classes.popper} 
                     anchororigin={{
                         vertical: 'bottom',
                         horizontal: 'left',
@@ -86,7 +101,7 @@ class AppHeader extends Component {
                     }}
                     >
                         <Paper>
-                            <ClickAwayListener onClickAway={this.handleClose}>
+                            <ClickAwayListener onClickAway={this.handleAccountMenu}>
                                 <MenuList>
                                 <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                                 <MenuItem onClick={this.handleClose}>My account</MenuItem>

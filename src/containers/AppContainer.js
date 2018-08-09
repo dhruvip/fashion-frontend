@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import ItemsGrid from './../components/App/Grid';
 import AppHeader from './../components/AppHeader/AppHeader';
+import Cart from './../components/Cart';
 // import SideBar from './../components/SideBar/SideBar';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import customTheme from './../components/Theme/Theme';
@@ -54,22 +55,32 @@ class AppContainer extends Component {
     componentDidMount() {
 		console.log(this.props)
 		this.props.fetchAllItems();
-    }
+	}
+	
+	redirectToCart = () => {
+		this.props.history.push('/cart');
+	}
+
+	redirectToShopify = () => {
+		this.props.history.push('/shopify');
+	}
 
 	renderApp = () => {
-		console.log(this.props.items)
+		console.log(this.props)
 		this.props.items.data[0].itemModel = 'qwertyuio erdtghjkl; ertyuio dfghjkl fsgdsdfgczsjk dsjfcjfuiewiruehuifh kuasdhkajwheruiahkwurfhiuwecfiuewgfkugicukebfkue jewydygJKWGEIDUEGDYUKDVUKYEWVBCDBWE';
 		const { classes } = this.props;
-		return (<MuiThemeProvider theme={customTheme}>
+		return (
 			<div className={classes.root}>
-				<AppHeader />
+				<AppHeader onCartClick={this.redirectToCart} onLogoClick={this.redirectToShopify}/>
 				<div className={classes.container}>
 					{/* <SideBar /> */}
-					<ItemsGrid data={this.props.items.data}/>
+					{this.props.match.path == '/shopify' ?
+						<ItemsGrid data={this.props.items.data}/> : 
+						(this.props.match.path == '/cart' ?
+						<Cart /> : <div />)}
 				</div>
                 
-			</div>
-		</MuiThemeProvider>);
+			</div>)
 	};
 	render() {
 		console.log(this.props.items)
