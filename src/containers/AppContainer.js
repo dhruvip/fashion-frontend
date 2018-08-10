@@ -23,10 +23,13 @@ const styles = theme => ({
 		width: '100%',
 		display: 'flex',
 		justifyContent: 'space-between',
-		marginTop: '70px',
+		marginTop: '56px',
+		'@media (min-width:0px) and (orientation: landscape)':{marginTop: '48px'},
+		'@media (min-width:600px)':{marginTop: '64px'},
 		margin: '0 0 0 0',
 		position: 'relative',
-		flex: '1 0 auto'
+		flex: '1 0 auto',
+		// overflowY: 'auto'
 	}
 });
 

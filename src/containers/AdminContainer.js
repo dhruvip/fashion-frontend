@@ -24,6 +24,9 @@ const adminPageStyles = theme => {
 		root: {
 			paddingLeft: '5%',
 			paddingTop: '2%',
+			'@media (min-width:0px) and (orientation: landscape)':{marginTop: '48px'},
+			'@media (min-width:600px)':{marginTop: '64px'},
+			marginTop: '56px',
 			position: 'relative'
 		},
 		addButton: {
@@ -32,6 +35,7 @@ const adminPageStyles = theme => {
 			position: 'absolute'
 		},
 		adminTitle: {
+			...theme.typography.title,
 			color: theme.palette.primary.main,
 			paddingBottom: '20px',
 		},

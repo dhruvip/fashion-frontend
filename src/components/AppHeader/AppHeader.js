@@ -25,15 +25,16 @@ const styles = theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 100,
         position: 'fixed',
-        minWidth: 'auto'
+        ...theme.mixins.toolbar
     },
     logo: {
-      flexGrow: 1,
-      cursor: 'pointer',
-      '&:hover': {
-          fontSize: '0.99em',
-          textShadow: '1px 1px #000000'
-      }
+    //   flexGrow: 1,
+        width: 'fit-content',
+        cursor: 'pointer',
+        '&:hover': {
+            fontSize: '0.99em',
+            textShadow: '1px 1px #000000'
+        }
     },
     popper: {
         zIndex: theme.zIndex.tooltip,
@@ -73,8 +74,12 @@ class AppHeader extends Component {
         const { classes } = this.props;
         return (<AppBar elevation={1} className={classes.appBar}>
             <Toolbar>
-                <Typography className={classes.logo}
-                    onClick={() => this.props.onLogoClick()}> Common Closet</Typography>
+                <div style={{'flexGrow': 1}}> 
+                    <Typography className={classes.logo}
+                    onClick={() => this.props.onLogoClick()}>
+                        Common Closet
+                    </Typography>
+                </div>
                 <div >
                     <IconButton
                         onClick={this.handleAccountMenu}
