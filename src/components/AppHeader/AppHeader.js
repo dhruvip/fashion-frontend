@@ -15,7 +15,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
-
+import { Redirect } from 'react-router-dom'
 
 
 const styles = theme => ({
@@ -23,11 +23,22 @@ const styles = theme => ({
       flexGrow: 1,
     },
     appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        position: 'static'
+        zIndex: theme.zIndex.drawer + 100,
+        position: 'fixed',
+        ...theme.mixins.toolbar
     },
-    flex: {
-      flexGrow: 1,
+    logo: {
+    //   flexGrow: 1,
+        width: 'fit-content',
+        cursor: 'pointer',
+        '&:hover': {
+            fontSize: '0.99em',
+            textShadow: '1px 1px #000000'
+        }
+    },
+    popper: {
+        zIndex: theme.zIndex.tooltip,
+        marginTop: '0.313em'
     },
     menuButton: {
       marginLeft: -12,
@@ -39,64 +50,70 @@ class AppHeader extends Component {
 
     constructor(props) {
         super(props);
+        this.accountBtn = React.createRef();
+        this.cartBtn = React.createRef();
         this.state = {
-            auth: true,
-            anchorEl: null,
+            accountBtnClick: false
           };
     } 
 
-    handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
+    handleAccountMenu = event => {
+        this.accountBtn = event.currentTarget;   
+        this.setState(state => ({ accountBtnClick: !state.accountBtnClick }));
     };
 
+    handleCartMenu = event => {
+        event.preventDefault();
+        this.props.onCartClick();
+    }
+
     handleClose = () => {
-        this.setState({ anchorEl: null });
     };
 
     renderAppHeader = () => {
-        const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
         const { classes } = this.props;
         return (<AppBar elevation={1} className={classes.appBar}>
             <Toolbar>
-                <Typography className={classes.flex}> Common Closet</Typography>
+                <div style={{'flexGrow': 1}}> 
+                    <Typography className={classes.logo}
+                    onClick={() => this.props.onLogoClick()}>
+                        Common Closet
+                    </Typography>
+                </div>
                 <div >
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleMenu}
-                        color="inherit"
+                        onClick={this.handleAccountMenu}
                         className={classes.menuButton}
                     >
                         <AccountCircle />
                     </IconButton>
                     <IconButton
-                        aria-owns={open ? 'menu-appbar' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleMenu}
-                        color="inherit"
+                        ref={this.cartBtn}
+                        onClick={this.handleCartMenu}
                         className={classes.menuButton}
                     >
                         <Cart />
                     </IconButton>
-                    <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
-                        {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            id="menu-appbar"
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                            <Paper>
-                            <ClickAwayListener onClickAway={this.handleClose}>
+                    <Popper open={this.state.accountBtnClick} anchorEl={this.accountBtn}
+                    className={classes.popper} 
+                    anchororigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    transformorigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    >
+                        <Paper>
+                            <ClickAwayListener onClickAway={this.handleAccountMenu}>
                                 <MenuList>
                                 <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                                 <MenuItem onClick={this.handleClose}>My account</MenuItem>
                                 <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                        )}
+                        </Paper>
                     </Popper>
                 </div>
             </Toolbar>

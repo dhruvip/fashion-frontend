@@ -42,4 +42,17 @@ export function deleteOneItem (item) {
     };
 }
 
+export function resetAuthToken () {
+    const request = axios.post(`${config.backendServer}${config.authRoute}`,
+            {},
+            {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT fefege...' 
+            });
+    return {
+        type: 'RESET_AUTH',
+        payload: request
+    };
+}
+
 export default {}

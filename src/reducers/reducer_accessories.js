@@ -1,23 +1,4 @@
 export default function () {
-    return [{
-        itemCode: 'AA001',
-        itemName: 'Watch',
-        itemImage: '',
-        itemRentPerDay: 50
-    }, {
-        itemCode: 'AA002',
-        itemName: 'Shoe',
-        itemImage: '',
-        itemRentPerDay: 50
-    }, {
-        itemCode: 'AA003',
-        itemName: 'Belt',
-        itemImage: '',
-        itemRentPerDay: 50
-    }, {
-        itemCode: 'AA004',
-        itemName: 'Necklace',
-        itemImage: '',
-        itemRentPerDay: 50
-    }];
+    return {
+        "data": [{"_id":"5b5ed9ea17d9ec4b980b46d9","itemName":"Item Name3","itemId":"Item Id3","productId":"3Product Name","brandId":"3Brand Name","itemModel":"Item Model3","itemRetailCost":4322,"__v":0},{"_id":"5b5edb7017d9ec4b980b46dc","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":87654,"__v":0},{"_id":"5b5edc4c17d9ec4b980b46dd","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":987654,"__v":0},{"_id":"5b5edca617d9ec4b980b46df","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":57657,"__v":0},{"_id":"5b60390436f0bd426caed445","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":43,"__v":0},{"_id":"5b60390836f0bd426caed446","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":453,"__v":0},{"_id":"5b60390c36f0bd426caed447","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":87654,"__v":0},{"_id":"5b60391036f0bd426caed448","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":8765,"__v":0},{"_id":"5b60391336f0bd426caed449","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":65432,"__v":0},{"_id":"5b60391736f0bd426caed44a","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":54321,"__v":0},{"_id":"5b60391d36f0bd426caed44b","itemName":"Item Name","itemId":"Item Id","productId":"Product Name","brandId":"Brand Name","itemModel":"Item Model","itemRetailCost":4335435,"__v":0}],"dataCount":11};
 }

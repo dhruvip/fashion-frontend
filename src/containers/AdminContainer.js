@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//
+import theme from './../components/Theme/Theme';
 
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { Add } from '@material-ui/icons';
 
 
-import customTheme from './../components/Theme/Theme';
 import ItemsTable from './../components/Admin/ItemsTable';
 import AddModal from './../components/Admin/ItemAddModal';
 import AppHeader from './../components/AppHeader/AppHeader';
 
-
 //actions
 import { fetchAllItems, saveNewItem, deleteOneItem } from './../actions/index';
+console.log(theme)
 
 const adminPageStyles = theme => {
+	console.log(theme)
 	return ({
 		root: {
 			paddingLeft: '5%',
 			paddingTop: '2%',
+			'@media (min-width:0px) and (orientation: landscape)':{marginTop: '48px'},
+			'@media (min-width:600px)':{marginTop: '64px'},
+			marginTop: '56px',
+			position: 'relative'
 		},
 		addButton: {
 			right: '185px',
@@ -32,14 +37,14 @@ const adminPageStyles = theme => {
 		adminTitle: {
 			...theme.typography.title,
 			color: theme.palette.primary.main,
-			paddingBottom: '20px'
+			paddingBottom: '20px',
 		},
 	});
 };
 
 function mapStateToProps(state) {
 	return {
-		...state
+		items: state.items,
 	};
 }
 
@@ -56,7 +61,7 @@ class AdminContainer extends Component {
 		super(props);
 		this.state = {
 			selectedItemType: 'watch',
-			open: false,
+			open: false
 		};
 	}
 	addItemModalOpen = () => {
@@ -145,12 +150,12 @@ class AdminContainer extends Component {
 
 	render() {
 		const { classes } = this.props;
-		return (<MuiThemeProvider theme={customTheme}>
+		return (<div>
 			<AppHeader />
 			<div className={classes.root}>
-				<div className={classes.adminTitle} style={{color: customTheme.palette.primary.main}} >
+				<Typography className={classes.adminTitle} >
 					ADMIN
-				</div>
+				</Typography>
 				{ this.props.items ? <ItemsTable schema={this.getFormSchema()}
 				data={this.props.items.data}
 				onDelete={this.onItemDelete}/> : ''}
@@ -168,8 +173,8 @@ class AdminContainer extends Component {
 					onSave={this.onAddModalSave}
 					formSchema={this.getFormSchema()}/> : <div />}
 			</div>
-		</MuiThemeProvider>);
+		</div>);
 	}
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(adminPageStyles)(AdminContainer));
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(adminPageStyles,{withTheme: true})(AdminContainer));
