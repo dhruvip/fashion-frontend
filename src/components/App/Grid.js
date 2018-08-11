@@ -13,29 +13,29 @@ const styles = theme => {
     console.log(theme)
     return ({
         root: {
-            // ...theme.mixins.gutters(),
-            // paddingTop: theme.spacing.unit * 2,
+            ...theme.mixins.gutters(),
+            paddingTop: '5%',
             // paddingBottom: theme.spacing.unit * 2,
             // marginTop: '0.625em',
             // marginLeft: '1.250em',
             // marginRight: '1.250em',
-            // display: 'flex',
-            // flexDirection: 'column',
-            // flexWrap: 'wrap',
-            // justifyContent: 'space-evenly',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly',
             // // maxWidth: '62.500em',
             // maxHeight: '100vh'
 
         },
         card: {
-            width: '18.750em',
+            // width: '18.750em',
             heigth: 'fit-content',
-            minWidth: '10vw',
-            maxWidth: '18.750em',
+            // minWidth: '10vw',
+            maxWidth: '25vw',
             flexGrow: 1,
             marginRight: '1em',
             marginBottom: '1em',
-            flexBasis: '33.3%',
+            flexBasis: '25%',
             cursor: 'pointer'
         },
         link: {

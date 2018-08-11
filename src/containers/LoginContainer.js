@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
+import { resetAuthToken } from './../actions';
 
 
 function mapStateToProps(state) {
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
     
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ 
+        resetAuthToken: resetAuthToken
         }, dispatch);
 }
 
@@ -82,6 +84,14 @@ const styles = theme => {
 }
 
 class LoginContainer extends Component {
+    onSignIn = () => {
+        this.props.resetAuthToken().then((tkn) => {
+            console.log(tkn)
+            document.cookie = "{authToken=" + tkn.payload.data.token+"}";
+        },(e) => {
+
+        });
+    }
     render() {
         const { classes } = this.props;
         return (
@@ -117,7 +127,7 @@ class LoginContainer extends Component {
                     }}
                 />
                 <Link to={`/forgot-password`} className={classes.forgotLogin}>Forgot Password?</Link>
-                <Button variant="contained" color="primary" className={classes.button} onClick={this.onSave}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={this.onSignIn}>
                     Sign In
                 </Button>
                 </div>
