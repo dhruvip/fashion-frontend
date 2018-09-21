@@ -5,6 +5,16 @@ import Table from '@material-ui/core/Table';
 import { Paper, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
 
+const ImageLinkTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+}))(TableCell);
+
 class ItemsTable extends Component {
     /**
      * var items   = new Schema({

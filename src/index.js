@@ -16,7 +16,8 @@ import Login from './containers/LoginContainer'
 
 const createStoreWithMiddleWare = applyMiddleware(ReduxPromise)(createStore)
 
-const TestComponent = () => {
+const TestComponent = (props) => {
+    console.log(props);
     return (
       <div>This is test component</div>
     )

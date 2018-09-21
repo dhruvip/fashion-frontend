@@ -1,9 +1,9 @@
 import config from '../config/dev.config.js';
 import axios from 'axios';
 
-export function fetchAllItems(item) {
-    console.log('action-fetchALlItems', item);
-    const request = axios.post(`${config.backendServer}${config.itemsRoute}read`, 
+export function fetchAllItems(category) {
+    console.log('action-fetchALlItems', category);
+    const request = axios.post(`${config.backendServer}${config.routes[category]}read`, 
             {},
             {
                 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export function fetchAllItems(item) {
 }
 
 export function saveNewItem (newItem) {
-    const request = axios.post(`${config.backendServer}${config.itemsRoute}add`, 
+    const request = axios.post(`${config.backendServer}${config.routes['items']}add`, 
             newItem,
             {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export function saveNewItem (newItem) {
 }
 
 export function deleteOneItem (item) {
-    const request = axios.post(`${config.backendServer}${config.itemsRoute}delete`,
+    const request = axios.post(`${config.backendServer}${config.routes['items']}delete`,
             item,
             {
                 'Content-Type': 'application/json',
