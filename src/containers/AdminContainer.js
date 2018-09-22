@@ -14,6 +14,9 @@ import ItemsTable from './../components/Admin/ItemsTable';
 import AddModal from './../components/Admin/ItemAddModal';
 import AppHeader from './../components/AppHeader/AppHeader';
 
+//form schemas
+import products from './../models/products';
+
 //actions
 import { fetchAllItems, saveNewItem, deleteOneItem } from './../actions/index';
 console.log(theme)
@@ -60,7 +63,7 @@ class AdminContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedItemType: 'watch',
+			selectedItemType: 'products',
 			open: false
 		};
 	}
@@ -72,9 +75,9 @@ class AdminContainer extends Component {
 		this.setState({open: false});
 	}
 
-	getFormSchema = () => {
+	getFormSchema = (selection) => {
 		switch(this.state.selectedItemType) {
-			case 'watch':
+			case 'item':
 				return [{
 					columnName: 'Item Name',
 					modelName: 'itemName',
@@ -106,6 +109,8 @@ class AdminContainer extends Component {
 					type: 'text',
 					required: true
 				}];
+			case 'products':
+				return products;
 			default:
 				return []
 		}
@@ -141,7 +146,7 @@ class AdminContainer extends Component {
 
 	componentDidMount() {
 		console.log(this.props)
-		this.props.fetchAllItems().then((d)=>{
+		this.props.fetchAllItems(this.state.selectedItemType).then((d)=>{
 			console.log(d)
 		},(e)=>{
 			console.log(e)

@@ -8,7 +8,7 @@ import authReducers from './reducer_auth';
 const rootReducer = combineReducers({
   accessories: AccessoriesReducer,
   activeAccessories: ActiveAccessoriesReducer,
-  items: AccessoriesReducer,
+  items: PopulateItemsGrid,
   saveStatus: saveStatus,
 });
 export default rootReducer;
