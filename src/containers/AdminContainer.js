@@ -131,9 +131,9 @@ class AdminContainer extends Component {
 		})
 	}
 
-	onAddModalSave = (newItem) => {
-		console.log('admin:new add: ', newItem);
-		this.props.saveNewItem(newItem).then((d) =>{
+	onAddModalSave = (newItem, category) => {
+		console.log('admin:new add: ', newItem, category);
+		this.props.saveNewItem(newItem, category).then((d) =>{
 			console.log(d)
 			if (d.payload.status === 200) {
 				console.log('save successful');
@@ -172,7 +172,8 @@ class AdminContainer extends Component {
 					className={classes.addButton}>
 					<Add />
 				</Button>
-				{ this.state.open ? <AddModal 
+				{ this.state.open ? <AddModal
+					category={this.state.selectedItemType}
 					isOpen={this.state.open}
 					onClose={this.addItemModalClose}
 					onSave={this.onAddModalSave}

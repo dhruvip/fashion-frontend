@@ -16,8 +16,8 @@ export function fetchAllItems(category) {
     };
 }
 
-export function saveNewItem (newItem) {
-    const request = axios.post(`${config.backendServer}${config.routes['items']}add`, 
+export function saveNewItem (newItem, category) {
+    const request = axios.post(`${config.backendServer}${config.routes[category]}add`, 
             newItem,
             {
                 'Content-Type': 'application/json',
@@ -29,8 +29,8 @@ export function saveNewItem (newItem) {
     };
 }
 
-export function deleteOneItem (item) {
-    const request = axios.post(`${config.backendServer}${config.routes['items']}delete`,
+export function deleteOneItem (item, category) {
+    const request = axios.post(`${config.backendServer}${config.routes[category]}delete`,
             item,
             {
                 'Content-Type': 'application/json',

@@ -72,7 +72,7 @@ class Form extends Component {
             newItem[field.modelName] = this.state[field.columnName];
         });
         console.log('save in form')
-        this.props.onSave(newItem);
+        this.props.onSave(newItem, this.props.category);
         this.props.onCancel();
     };
 
@@ -156,7 +156,8 @@ class ItemAddModal extends Component {
             <AddItemForm 
             onSave={this.props.onSave} 
             onCancel={this.addItemModalClose}
-            formSchema={this.props.formSchema}/>
+            formSchema={this.props.formSchema}
+            category={this.props.category}/>
             </div>
         </Modal>);
     }
